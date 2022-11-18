@@ -7,8 +7,6 @@ import { CardMedia, IconButton, DialogTitle } from "@mui/material";
 import {
   ViewContainer,
   ViewCard,
-  CardContent,
-  Title,
   GridInformations,
   TextDescription,
 } from "./StyledComponents";

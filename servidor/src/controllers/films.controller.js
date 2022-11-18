@@ -35,15 +35,9 @@ module.exports = {
         rt_score,
       };
       film = await Film.create(data);
-      res.status(200);
+      return res.status(200).json(film);
     } else {
-      res.status(200);
+      return res.status(200).json(film);
     }
-  },
-
-  async details(req, res) {
-    const { id } = req.params;
-    const film = await Film.findByPk(id);
-    res.json(film);
   },
 };

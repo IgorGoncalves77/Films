@@ -13,4 +13,5 @@ export const HeaderContainer = styled.div`
 export const Title = styled.div`
   color: #e50914;
   font-weight: bold;
+  font-size: 1.5rem;
 `;

@@ -13,6 +13,7 @@ export const ViewContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: rgba(0, 0, 0, 0.8);
 `;
 
 export const ViewCard = styled.div`

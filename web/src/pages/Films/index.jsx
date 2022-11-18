@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { filmsRequest } from "../../redux/actions/filmsActions";
+
+import { Container, NotificationContainer } from "./StyledComponents";
+import { Collapse } from "@mui/material";
 
 import { DynamicHeader } from "../../components/DynamicHeader";
 import { DynamicList } from "../../components/DynamicList";
-
-import { filmsRequest } from "../../redux/actions/filmsActions";
-import { searchFilms, addFilm } from "../../services/api";
-import { Collapse } from "@mui/material";
 import { Notification } from "../../common/Notification";
-import { Container, NotificationContainer } from "./StyledComponents";
+
+import { searchFilms, addFilm } from "../../services/api";
 
 export const Films = () => {
   const dispatch = useDispatch();
@@ -22,30 +23,29 @@ export const Films = () => {
   useEffect(() => {
     dispatch(filmsRequest());
   }, [dispatch, atualizar]);
-  console.log(atualizar);
 
-  async function atualizationFilms() {
-    await searchFilms()
-      .then(function (data) {
-        const films = data;
-        films.map((film) => {
+  function atualizationFilms() {
+    searchFilms().then(function (data) {
+      const newFilms = data;
+      if (films.length === newFilms.length) {
+        setOpenNotification(true);
+        setNotification("Lista atualizada!");
+        setTimeout(() => {
+          setOpenNotification(false);
+          setAtualizar(true);
+        }, 4000);
+      } else {
+        newFilms.map((film) => {
           addFilm(film);
         });
-      })
-      .then(async ({ data }) => {
         setOpenNotification(true);
-        setNotification("Lista Atualizada!");
+        setNotification("Atualizando lista...");
         setTimeout(() => {
           setOpenNotification(false);
+          setAtualizar(true);
         }, 4000);
-      })
-      .catch((error) => {
-        setOpenNotification(true);
-        setNotification("Erro ao atualizar lista de filmes!");
-        setTimeout(() => {
-          setOpenNotification(false);
-        }, 4000);
-      });
+      }
+    });
   }
 
   return (
@@ -59,28 +59,10 @@ export const Films = () => {
         <DynamicList items={films} />
         <Collapse in={openNotification}>
           <NotificationContainer>
-            <Notification type={"error"} message={notification} />
+            <Notification type={"success"} message={notification} />
           </NotificationContainer>
         </Collapse>
       </Container>
     </>
   );
 };
-
-/*      .then(async ({ data }) => {
-        setOpenNotification(true);
-        setNotification("Lista Atualizada!");
-        setTimeout(() => {
-          setOpenNotification(false);
-        }, 4000);
-      })
-      .catch((error) => {
-        setOpenNotification(true);
-        //setNotification("Erro ao atualizar lista de filmes!");
-
-        setNotification("Lista Atualizada!");
-        setTimeout(() => {
-          setOpenNotification(false);
-          setAtualizar(true);
-        }, 4000);
-      });*/

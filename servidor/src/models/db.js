@@ -1,7 +1,6 @@
 const { Sequelize } = require("sequelize");
 
 const sequelize = new Sequelize("films", "root", "admin", {
-  //database, username, password
   host: "localhost",
   dialect: "mysql",
 });

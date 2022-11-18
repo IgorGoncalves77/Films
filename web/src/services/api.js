@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const apiSearchFilms = "https://ghibliapi.herokuapp.com";
+const apiGhibli = "https://ghibliapi.herokuapp.com";
 
 const api = axios.create({
   baseURL: "http://localhost:5000",
@@ -8,7 +8,7 @@ const api = axios.create({
 
 export function searchFilms() {
   return new Promise(function (resolve, reject) {
-    fetch(apiSearchFilms + "/films")
+    fetch(apiGhibli + "/films")
       .then((response) => response.json())
       .then((data) => resolve(data))
       .catch(reject);
