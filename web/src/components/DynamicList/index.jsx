@@ -39,7 +39,7 @@ export const DynamicList = ({ items }) => {
         page={page}
         onChange={handleChange}
         color="error"
-        sx={{ display: "flex", justifyContent: "center" }}
+        sx={{ display: "flex", justifyContent: "center", p: "10px" }}
       />
     </ListContainer>
   );
