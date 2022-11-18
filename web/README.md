@@ -17,17 +17,13 @@ Records in MySQL database and lists the films, where you can see their detailed 
 
 <table>
   <tr>
-    <td><strong>Listing - Detailed View</strong></td>
+    <td><strong>Listing</strong></td>
+    <td><strong>Detailed View</strong></td>
   <tr>
 
    <tr>
     <td>
-      <img 
-        width="200px"
-        height="auto" 
-        src ="/src/assets/Layout1.png" 
-      />
-    </td>
+    <td><img src ="/src/assets/Layout1.png"/></td>
     <td><img src ="/src/assets/Layout2.png"/></td>
   <tr>
 </table>
