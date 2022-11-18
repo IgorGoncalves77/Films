@@ -15,7 +15,8 @@ Records in MySQL database and lists the films, where you can see their detailed 
 
 ## 🔖 Layout
 
-![layout](../web/src/assets/Layout1.png)
+![layout1](../web/src/assets/Layout1.png)
+![layout2](../web/src/assets/Layout1.png)
 
 <table>
   <tr>
