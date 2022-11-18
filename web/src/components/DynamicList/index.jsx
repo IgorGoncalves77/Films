@@ -22,7 +22,7 @@ export const DynamicList = ({ items }) => {
       <Grid
         container
         columns={{ xs: 4, sm: 8, md: 10 }}
-        sx={{ minHeight: "82vmin", display: "flex", justifyContent: "center" }}
+        sx={{ minHeight: "78vmin", display: "flex", justifyContent: "center" }}
       >
         {data.currentData().map((item, index) => {
           return (
