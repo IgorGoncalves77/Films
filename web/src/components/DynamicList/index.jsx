@@ -1,35 +1,30 @@
 import React, { useState } from "react";
-import { Grid } from "@mui/material";
+import { Grid, Pagination } from "@mui/material";
 import { ListContainer } from "./StyledComponents";
-import { DynamicCard } from "../DynamicCard";
-import Pagination from "@mui/material/Pagination";
 
-import usePagination from "./Pagination";
+import { DynamicCard } from "../DynamicCard";
+import usePagination from "../../functions/Pagination";
 
 export const DynamicList = ({ items }) => {
   let [page, setPage] = useState(1);
-  const PER_PAGE = 10;
+  const perPage = 10;
 
-  const count = Math.ceil(items.length / PER_PAGE);
-  const _DATA = usePagination(items, PER_PAGE);
+  const count = Math.ceil(items.length / perPage);
+  const data = usePagination(items, perPage);
 
   const handleChange = (e, p) => {
     setPage(p);
-    _DATA.jump(p);
+    data.jump(p);
   };
 
   return (
     <ListContainer>
-      <Pagination
-        count={count}
-        size="large"
-        page={page}
-        variant="outlined"
-        shape="rounded"
-        onChange={handleChange}
-      />
-      <Grid container columns={{ xs: 4, sm: 8, md: 10 }}>
-        {_DATA.currentData().map((item, index) => {
+      <Grid
+        container
+        columns={{ xs: 4, sm: 8, md: 10 }}
+        sx={{ minHeight: "82vmin", display: "flex", justifyContent: "center" }}
+      >
+        {data.currentData().map((item, index) => {
           return (
             <Grid key={index}>
               <DynamicCard item={item} />
@@ -37,6 +32,15 @@ export const DynamicList = ({ items }) => {
           );
         })}
       </Grid>
+
+      <Pagination
+        count={count}
+        size="large"
+        page={page}
+        onChange={handleChange}
+        color="error"
+        sx={{ display: "flex", justifyContent: "center" }}
+      />
     </ListContainer>
   );
 };

@@ -35,9 +35,9 @@ module.exports = {
         rt_score,
       };
       film = await Film.create(data);
-      return res.status(200).json(film);
+      res.status(200);
     } else {
-      return res.status(500).json(film);
+      res.status(200);
     }
   },
 

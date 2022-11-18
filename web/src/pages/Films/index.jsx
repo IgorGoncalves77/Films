@@ -6,9 +6,9 @@ import { DynamicList } from "../../components/DynamicList";
 
 import { filmsRequest } from "../../redux/actions/filmsActions";
 import { searchFilms, addFilm } from "../../services/api";
-import { Grid, TextField, Button, Collapse } from "@mui/material";
+import { Collapse } from "@mui/material";
 import { Notification } from "../../common/Notification";
-import { NotificationContainer } from "./StyledComponents";
+import { Container, NotificationContainer } from "./StyledComponents";
 
 export const Films = () => {
   const dispatch = useDispatch();
@@ -16,10 +16,13 @@ export const Films = () => {
   const [openNotification, setOpenNotification] = useState(false);
   const [notification, setNotification] = useState("");
 
+  const [atualizar, setAtualizar] = useState(false);
+
   const films = useSelector((state) => state.filmsReducer.films);
   useEffect(() => {
     dispatch(filmsRequest());
-  }, [dispatch]);
+  }, [dispatch, atualizar]);
+  console.log(atualizar);
 
   async function atualizationFilms() {
     await searchFilms()
@@ -47,17 +50,37 @@ export const Films = () => {
 
   return (
     <>
-      <DynamicHeader
-        onClickHandler={atualizationFilms}
-        buttonText={"Atualizar"}
-        title={"FILMS"}
-      />
-      <DynamicList items={films} />
-      <Collapse in={openNotification}>
-        <NotificationContainer>
-          <Notification type={"error"} message={notification} />
-        </NotificationContainer>
-      </Collapse>
+      <Container>
+        <DynamicHeader
+          onClickHandler={atualizationFilms}
+          buttonText={"Atualizar"}
+          title={"FILMS"}
+        />
+        <DynamicList items={films} />
+        <Collapse in={openNotification}>
+          <NotificationContainer>
+            <Notification type={"error"} message={notification} />
+          </NotificationContainer>
+        </Collapse>
+      </Container>
     </>
   );
 };
+
+/*      .then(async ({ data }) => {
+        setOpenNotification(true);
+        setNotification("Lista Atualizada!");
+        setTimeout(() => {
+          setOpenNotification(false);
+        }, 4000);
+      })
+      .catch((error) => {
+        setOpenNotification(true);
+        //setNotification("Erro ao atualizar lista de filmes!");
+
+        setNotification("Lista Atualizada!");
+        setTimeout(() => {
+          setOpenNotification(false);
+          setAtualizar(true);
+        }, 4000);
+      });*/
